@@ -1,3 +1,3 @@
 # Personal_blog
-[Link to Blogue](https://www.google.com)
+[Link to Blogue](https://blogue.pythonanywhere.com/)
 
