@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <!-- Latest Posts -->
+        <main class="posts-listing col-lg-12"> 
+            <div class="container">
+                <div class="row">
+                {% for p in photos %}
+                    <div class="post col-xl-4">
+                            <div class="post-thumbnail">
+                                <img src="{{ p.images.url }}" alt="..." class="img-fluid">
+                            </div>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+
+        </main>
+    </div>
+</div>
+
+  {% endblock %}

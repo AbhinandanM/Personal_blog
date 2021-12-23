@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% if user.is_staff %}
+    <div class="col-4 offset-4 mb-5 mt-5" >
+    <h3>Add Category</h3>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.media }}
+        {{ form|crispy }}
+        <button class="btn btn-secondary" type="submit">Submit</button>
+
+    </form>
+
+    </div>
+{% else %}
+
+Please log in to continue...
+
+{% endif %}
+
+{% endblock content%}

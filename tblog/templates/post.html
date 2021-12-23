@@ -1,0 +1,171 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content%}
+
+<main id="main">
+
+  <!-- ======= Breadcrumbs ======= -->
+  <section id="breadcrumbs" class="breadcrumbs">
+    <div class="breadcrumb-hero">
+      <div class="container">
+        <div class="breadcrumb-hero">
+          <h2>Blogue</h2>
+          <p>Your perfect knowledge companion</p>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li>{{ post.title }}</li>
+      </ol>
+    </div>
+  </section><!-- End Breadcrumbs -->
+
+  <!-- ======= Blog Single Section ======= -->
+  <section id="blog" class="blog">
+    <div class="container">
+
+      <div class="row">
+
+        <div class="col-lg-8 entries">
+
+          <article class="entry entry-single">
+
+            <div class="entry-img">
+              <img src="assets/img/blog/blog-1.jpg" alt="" class="img-fluid">
+            </div>
+
+            <h2 class="entry-title" style="margin: 0 0 20px 0;">
+              <a href="#!">{{ post.title }}</a>
+            </h2>
+            
+            <div class="entry-meta">
+              <ul>
+                <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="#!">{{ post.author.user.username }}</a></li>
+                <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="#!">{{ post.timestamp|timesince }} ago</a></li>
+              </ul>
+            </div>
+
+            <div class="entry-content" style="text-align: justify;">
+              <p>{{ post.content|safe }}</p>
+
+            </div>
+
+            <div class="entry-footer">
+              <i class="bi bi-folder"></i>
+              <ul class="cats">
+                {% for cat in post.categories.all %}
+                  <li><a href="#!">{{ cat }}</a></li>
+                {% endfor %}
+                {% if request.user.is_superuser %}
+                  <li><a href="{% url 'post-update' id=post.id %}">|   Update   </a></li>
+                  <li><a href="{% url 'post-delete' id=post.id%}">|   Delete</a></li>
+                {% endif %}
+              </ul>
+            </div>
+
+          </article><!-- End blog entry -->
+
+          <div class="posts-nav d-flex justify-content-between align-items-stretch flex-column flex-md-row">
+            {% if post.previous_post %}
+
+            <a href="{{ post.previous_post.get_absolute_url }}" class="prev-post text-left d-flex align-items-center">
+              <div><i class="bi bi-arrow-left"></i></div>
+              <div class="text"><strong>{{ post.previous_post.title|slice:":40" }}</strong>
+               
+              </div>
+            </a>
+            {% endif %}
+            {% if post.next_post %}
+            <a href="{{ post.next_post.get_absolute_url }}" class="next-post text-right d-flex align-items-center justify-content-end">
+              <div class="text"><strong>{{  post.next_post.title }}</strong>
+                
+              </div>
+              <div><i class="bi bi-arrow-right"></i></div>
+            </a>
+            {% endif %}
+          </div></br></br>
+
+          <div class="blog-comments">
+
+            <h4 class="comments-count">{{ post.comment_count }} Comments</h4>
+            {% for comment in post.get_comments %}
+            <div id="comment-1" class="comment">
+              <div class="d-flex">
+                <div>
+                  <h5>{{ comment.user.username }}</h5>
+                  <time datetime="2020-01-01">{{ comment.timestamp}}</time>
+                  <p>{{ comment.content }}</p>
+                </div>
+              </div>
+            </div><!-- End comment #1 -->
+            {% endfor %}
+            <div class="reply-form">
+              <h4>Leave a Reply</h4>
+              {% if request.user.is_authenticated %}
+              <p>Required fields are marked * </p>
+              <form method="POST" action=".">
+                {% csrf_token %}
+                
+                <div class="row">
+                  <div class="col form-group">
+                    {{ form }}
+                  </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Post Comment</button>
+
+              </form>
+              {% else %}
+                Please <a class="btn btn-info" href="{% url 'login'%}" role="button">Login</a> to add comment
+              {% endif %}
+            </div>
+
+          </div><!-- End blog comments -->
+
+        </div><!-- End blog entries list -->
+
+        <div class="col-lg-4">
+
+          <div class="sidebar">
+
+            <h3 class="sidebar-title">Search</h3>
+            <div class="sidebar-item search-form">
+              <form action="{% url 'search' %}">
+                <input type="text" name='q' placeholder="What are you looking for?">
+                <button type="submit"><i class="bi bi-search"></i></button>
+              </form>
+            </div><!-- End sidebar search formn-->
+
+            <h3 class="sidebar-title">Recent Posts</h3>
+              <div class="sidebar-item recent-posts">
+                {% for post in most_recent %}
+                <div class="post-item clearfix">
+                  <img src="{{ post.thumbnail.url }}" alt="">
+                  <h4><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h4>
+                  <time datetime="2020-01-01">{{ post.view_count }} views</time>
+                </div>
+                {% endfor %}
+              </div><!-- End sidebar recent posts-->
+
+            <h3 class="sidebar-title">Categories</h3>
+            <div class="sidebar-item categories">
+              <ul>
+                {% for cat in category_count %}
+                <li><a href="#!">{{ cat.categories__title }} <span>{{ cat.categories__title__count}}</span></a></li>
+                {% endfor %}
+              </ul>
+            </div><!-- End sidebar categories-->
+      
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section><!-- End Blog Single Section -->
+
+</main><!-- End #main -->
+
+{% endblock content%}

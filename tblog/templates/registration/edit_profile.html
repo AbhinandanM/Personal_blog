@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+</br>
+</br>
+</br>
+<div class="col-4 offset-4 mb-5 mt-5" >
+<h1>Update Profile</h1>
+<div class="form-group">
+    <form method="POST">
+        {% csrf_token %}
+        {{ form|crispy }}
+
+        <button class="btn btn-secondary">Update</button>
+    
+</div>
+</div>
+</br></br>
+
+{% endblock content %}

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content%}
+</br>
+<main id="main">
+<section id="blog" class="blog">
+  <div class="container" data-aos="fade-up">
+
+    <div class="row">
+
+      <div class="col-lg-8 entries">
+        {% for post in queryset %}
+        <article class="entry">
+          <h2 class="entry-title">
+            <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+          </h2>
+
+          <div class="entry-content">
+            <p>
+              {{ post.overview|slice:":100" }}...  
+            </p>
+          </div>
+
+          <div class="entry-meta">
+            <ul>
+              <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="#!">{{ post.author.user.username }}</a></li>
+              <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="#!">{{ post.date_added }}</a></li>
+            </ul>
+          </div>
+
+        </article><!-- End blog entry -->
+        {% endfor %}
+        <div class="blog-pagination">
+          <ul class="justify-content-center">
+            {% if queryset.has_previous %}
+            <li><a href="?{{ page_request_var }}={{ queryset.previous_page_number }}"><i class="bi bi-arrow-left"></i></a></li>
+            {% endif %}
+            <li class="active"><a href="?{{ page_request_var }}={{ queryset.number }}">{{ queryset.number }}</a></li>
+            {% if queryset.has_next %}
+            <li><a href="?{{ page_request_var }}={{ queryset.next_page_number }}"><i class="bi bi-arrow-right"></i></a></li>
+            {% endif %}
+          </ul>
+        </div>
+
+      </div><!-- End blog entries list -->   
+
+    </div>
+
+  </div>
+</section><!-- End Blog Section -->
+</main>
+
+    
+{% endblock content%}

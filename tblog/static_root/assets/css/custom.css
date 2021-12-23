@@ -1,0 +1,29 @@
+.case-case {
+  width: 380px;
+  height: 280px;
+  object-fit: cover;
+  object-position: center center;
+}
+
+.btn-outline {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 12px 32px;
+  border-radius: 50px;
+  transition: 0.5s;
+  line-height: 1;
+  margin: 10px;
+  color: #fff;
+  -webkit-animation-delay: 0.8s;
+  animation-delay: 0.8s;
+  border: 2px solid #68a4c4;
+}
+
+.btn-outline:hover {
+  background: #68a4c4;
+  color: #fff;
+  text-decoration: none;
+}

@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content%}
+
+<main id="main">
+<section id="blog" class="blog">
+  {% if category_posts %}
+  <h1 style="text-align:center;">{{ cates }}</h1>
+  <div class="container" data-aos="fade-up">
+
+    <div class="row">
+
+      <div class="col-lg-8 entries">
+        {% for post in queryset %}
+        <article class="entry">
+          <h2 class="entry-title">
+            <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+          </h2>
+
+          <div class="entry-content">
+            <p>
+              {{ post.overview|slice:":100" }}...  
+            </p>
+          </div>
+
+          <div class="entry-meta">
+            <ul>
+              <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="#!">{{ post.author.user.username }}</a></li>
+              <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="#!">{{ post.date_added }}</a></li>
+            </ul>
+          </div>
+
+        </article><!-- End blog entry -->
+        {% endfor %}
+        <div class="blog-pagination">
+          <ul class="justify-content-center">
+            {% if queryset.has_previous %}
+            <li><a href="?{{ page_request_var }}={{ queryset.previous_page_number }}"><i class="bi bi-arrow-left"></i></a></li>
+            {% endif %}
+            <li class="active"><a href="?{{ page_request_var }}={{ queryset.number }}">{{ queryset.number }}</a></li>
+            {% if queryset.has_next %}
+            <li><a href="?{{ page_request_var }}={{ queryset.next_page_number }}"><i class="bi bi-arrow-right"></i></a></li>
+            {% endif %}
+          </ul>
+        </div>
+
+      </div><!-- End blog entries list -->   
+      <div class="col-lg-4">
+
+        <div class="sidebar">
+
+          <h3 class="sidebar-title">Search</h3>
+          <div class="sidebar-item search-form">
+            <form action="{% url 'search' %}">
+              <input type="text" name='q' placeholder="What are you looking for?">
+              <button type="submit"><i class="bi bi-search"></i></button>
+            </form>
+          </div><!-- End sidebar search formn-->
+
+          <h3 class="sidebar-title">Categories</h3>
+          <div class="sidebar-item categories">
+            <ul>
+              {% for cat in category_count %}
+              <li><a href="#!">{{ cat.categories__title }} <span>{{ cat.categories__title__count}}</span></a></li>
+              {% endfor %}
+            </ul>
+          </div><!-- End sidebar categories-->
+        </div>
+      </div>
+    </div>
+
+  </div>
+  {% else %}
+</br></br></br></br><h1 style="text-align: center;">No articles found related to this category</h1>
+  {% endif %}
+</section><!-- End Blog Section -->
+
+</main><!-- End #main -->
+   
+{% endblock content%}

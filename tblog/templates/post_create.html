@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<main id="main">
+    <section id="blog" class="blog">
+        <div class="container">
+{% if user.is_authenticated %}
+            <div class="row" style="text-align: justify;">
+                <div class="col-lg-8 col-md-6 ml-5 mr-5" >
+                    <h3>{{ title }} an article</h3>
+
+                        <form method="POST"  enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ form.media }}
+                            {{ form|crispy }}
+                        </br><button class="btn btn-secondary" type="submit">Submit</button>
+                        
+                        </form>
+                </div>
+            </div>
+{% else %}
+
+Please log in to continue...
+
+{% endif %}
+        </div>
+    </section>
+</main>
+{% endblock content%}

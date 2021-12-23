@@ -1,0 +1,52 @@
+{% load static %}
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    {% if post.title %}
+    <title>{{ post.title }}</title>
+    <meta property="og:title" content="{{ post.title }}">
+    <meta name="description" property="og:description" content="{{ post.overview }}">
+    <meta property="og:type" content="blog">
+    <meta property="og:image" content="https://blogue.xyz{{ post.thumbnail.url }}">
+    <meta {% for cat in post.categories.all %} content="{{ cat }}" {% endfor %} name="keywords">
+    {% else %}
+    <title>Blogue</title>
+    <meta content="Blogue is an awesome place for those who like to read, love to read & live to read"
+        name="description">
+    <meta content="Blogue" name="keywords">
+    {% endif %}
+    <meta name="google-site-verification" content="410q5vi5OdGnxWVBPwhB6vlHqwCOKRma66Krx2TrW0A" />
+    <!-- Favicons -->
+    <link href="{% static 'assets/img/favicon.png'%}" rel="icon">
+    <link href="{% static 'assets/img/apple-touch-icon.png'%}" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Slabo+27px&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital@1&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'assets/vendor/aos/aos.css'%}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css'%}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css'%}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css'%}" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="{% static 'assets/css/style.css'%}" rel="stylesheet">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2DGWTVCVXF"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-2DGWTVCVXF');
+    </script>
+
+</head>
