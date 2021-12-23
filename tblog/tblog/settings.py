@@ -10,7 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '9dfjc#4u*hban+&bpq+ur)e=v50-25g&t7w1dgumjxhsss+pnt'
+SECRET_KEY = '9dfjc#4u*hban+&bpq+urv50-25g&t7w1dgumjxhsss+pnt'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -215,8 +215,8 @@ LOGIN_REDIRECT_URL = 'index'
 LOGOUT_REDIRECT_URL = 'index'
 
 
-RECAPTCHA_PUBLIC_KEY = '6Lc0cM4ZAAAAAMV1S2pWIRx6o-83lKXeV9I4gJ9r'
-RECAPTCHA_PRIVATE_KEY = '6Lc0cM4ZAAAAAJUz-yxNAQn8pu2hTh5iyuzjQ9mR'
+RECAPTCHA_PUBLIC_KEY = 'pub key'
+RECAPTCHA_PRIVATE_KEY = 'pri key'
 
 
 # SMTP Configuration
@@ -225,6 +225,6 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'mabhinandan41@gmail.com'
-EMAIL_HOST_PASSWORD = 'sozxeumshwtheyen'
+EMAIL_HOST_PASSWORD = 'pswd'
 DEFAULT_FROM_EMAIL = 'mabhinandan41@gmail.com'
 SERVER_EMAIL = 'mabhinandan41@gmail.com'
